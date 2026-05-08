@@ -8,17 +8,23 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import HowItWorks from "./pages/HowItWorks";
+import Partners from "./pages/Partners";
 import DashboardDonatur from "./pages/DashboardDonatur";
 import DashboardRelawan from "./pages/DashboardRelawan";
+import About from "./pages/about/About";
 
 function App() {
     const { user } = useAuth();
 
     return (
         <Routes>
-            {/* ===================== PUBLIC ROUTES (dengan Navbar & Footer) ===================== */}
+            {/* ===================== PUBLIC ROUTES ===================== */}
             <Route element={<MainLayout />}>
                 <Route path="/" element={<Home />} />
+                <Route path="/how-it-works" element={<HowItWorks />} />
+                <Route path="/partners" element={<Partners />} />
+                <Route path="/about" element={<About />} />
                 <Route
                     path="/login"
                     element={
@@ -37,21 +43,21 @@ function App() {
                 />
             </Route>
 
-            {/* ===================== PROTECTED ROUTES — DONATUR ===================== */}
+            {/* ===================== PROTECTED — DONATUR ===================== */}
             <Route element={<ProtectedRoute role="donatur" />}>
                 <Route element={<AdminLayout />}>
                     <Route path="/dashboard/donatur" element={<DashboardDonatur />} />
                 </Route>
             </Route>
 
-            {/* ===================== PROTECTED ROUTES — RELAWAN ===================== */}
+            {/* ===================== PROTECTED — RELAWAN ===================== */}
             <Route element={<ProtectedRoute role="relawan" />}>
                 <Route element={<AdminLayout />}>
                     <Route path="/dashboard/relawan" element={<DashboardRelawan />} />
                 </Route>
             </Route>
 
-            {/* Catch-all: redirect ke home */}
+            {/* Catch-all */}
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
     );
