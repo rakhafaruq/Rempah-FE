@@ -33,6 +33,7 @@ function App() {
                             : <Login />
                     }
                 />
+            </Route>
                 <Route
                     path="/register"
                     element={
@@ -41,7 +42,6 @@ function App() {
                             : <Register />
                     }
                 />
-            </Route>
 
             {/* ===================== PROTECTED — DONATUR ===================== */}
             <Route element={<ProtectedRoute role="donatur" />}>
