@@ -14,6 +14,7 @@ export default function AdminLayout() {
 
     const donaturMenus = [
         { to: "/dashboard/donatur", label: "Dashboard", icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /> },
+        { to: "/donasi/saya", label: "Donasi Saya", icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /> },
         { to: "/donasi/baru", label: "Tambah Donasi", icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /> },
     ];
 
@@ -25,9 +26,9 @@ export default function AdminLayout() {
     const menus = isDonatur ? donaturMenus : relawanMenus;
 
     return (
-        <div className="min-h-screen flex bg-stone-100 font-sans">
+        <div className="h-screen flex bg-stone-100 font-sans overflow-hidden">
             {/* Sidebar */}
-            <aside className="w-64 min-h-screen bg-green-900 flex flex-col shadow-2xl flex-shrink-0">
+            <aside className="w-64 h-screen bg-green-900 flex flex-col shadow-2xl flex-shrink-0">
                 <div className="p-6 border-b border-green-800">
                     <Link to="/" className="text-2xl font-extrabold text-white tracking-tight">REMPAH</Link>
                     <p className="text-green-400 text-xs mt-1 font-medium">Rescue Makanan Penuh Berkah</p>

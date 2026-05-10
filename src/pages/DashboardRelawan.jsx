@@ -66,11 +66,36 @@ export default function DashboardRelawan() {
                             <div className="space-y-3">
                                 {data.klaim_aktif.map((klaim) => (
                                     <div key={klaim.id} className="bg-white rounded-2xl p-5 border border-orange-100 shadow-sm flex items-center justify-between">
-                                        <div>
-                                            <h4 className="font-bold text-gray-900">{klaim.donation?.nama_makanan ?? "Makanan"}</h4>
-                                            <p className="text-gray-500 text-sm font-medium">Diklaim pada {new Date(klaim.created_at).toLocaleDateString("id-ID", { day: "numeric", month: "long" })}</p>
+                                        <div className="flex-1">
+                                            <h4 className="font-bold text-gray-900 text-lg mb-1">{klaim.donation?.title ?? "Makanan"}</h4>
+                                            
+                                            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-2">
+                                                <div className="flex items-center gap-1.5 text-sm text-gray-600">
+                                                    <svg className="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                                    <span className="line-clamp-1">{klaim.donation?.location ?? "-"}</span>
+                                                </div>
+                                                <div className="flex items-center gap-1.5 text-sm text-gray-600">
+                                                    <svg className="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                                                    <span className="font-bold">{klaim.donation?.total_portion ?? 0} Porsi</span>
+                                                </div>
+                                                {klaim.donation?.donor?.user && (
+                                                    <div className="flex items-center gap-1.5 text-sm text-gray-600">
+                                                        <svg className="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                                                        <span>Donatur: {klaim.donation.donor.user.name}</span>
+                                                    </div>
+                                                )}
+                                                <div className="flex items-center gap-1.5 text-sm text-gray-600">
+                                                    <svg className="w-4 h-4 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                                    <span>Diklaim: {new Date(klaim.created_at).toLocaleString("id-ID", { day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" })}</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <span className="bg-orange-100 text-orange-700 text-xs font-bold px-3 py-1.5 rounded-full">Sedang Berlangsung</span>
+                                        <div className="text-right flex flex-col items-end gap-2">
+                                            <span className="bg-orange-100 text-orange-700 text-xs font-bold px-3 py-1.5 rounded-full inline-block">Sedang Berlangsung</span>
+                                            <Link to={`/distribusi/baru/${klaim.id}`} className="text-sm bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl font-bold transition-colors shadow-sm">
+                                                Selesaikan Distribusi
+                                            </Link>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
@@ -88,9 +113,28 @@ export default function DashboardRelawan() {
                             <div className="space-y-3">
                                 {data.riwayat.map((item) => (
                                     <div key={item.id} className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex items-center justify-between">
-                                        <div>
-                                            <h4 className="font-bold text-gray-900">{item.donation?.nama_makanan ?? "Makanan"}</h4>
-                                            <p className="text-gray-500 text-sm font-medium">{new Date(item.created_at).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}</p>
+                                        <div className="flex-1">
+                                            <h4 className="font-bold text-gray-900 text-lg mb-1">{item.donation?.title ?? "Makanan"}</h4>
+                                            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-2">
+                                                <div className="flex items-center gap-1.5 text-sm text-gray-600">
+                                                    <svg className="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                                    <span className="line-clamp-1">{item.donation?.location ?? "-"}</span>
+                                                </div>
+                                                <div className="flex items-center gap-1.5 text-sm text-gray-600">
+                                                    <svg className="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                                                    <span className="font-bold">{item.donation?.total_portion ?? 0} Porsi</span>
+                                                </div>
+                                                {item.donation?.donor?.user && (
+                                                    <div className="flex items-center gap-1.5 text-sm text-gray-600">
+                                                        <svg className="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                                                        <span>Donatur: {item.donation.donor.user.name}</span>
+                                                    </div>
+                                                )}
+                                                <div className="flex items-center gap-1.5 text-sm text-gray-600">
+                                                    <svg className="w-4 h-4 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                                    <span>Selesai: {new Date(item.created_at).toLocaleString("id-ID", { day: "numeric", month: "long", year: "numeric" })}</span>
+                                                </div>
+                                            </div>
                                         </div>
                                         <span className="bg-green-100 text-green-700 text-xs font-bold px-3 py-1.5 rounded-full">Selesai ✓</span>
                                     </div>

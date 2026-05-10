@@ -25,7 +25,7 @@ const ROLES = [
         value: "donatur",
         title: "Mitra UMKM",
         desc: "Daftarkan restoran, toko kelontong Anda untuk menyumbangkan kelebihan makanan berkualitas tinggi secara aman dan efisien.",
-        image: "/images/food-partner.png",
+        image: "/images/food-partner-cartoon.png",
         icon: (
             <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
