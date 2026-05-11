@@ -254,14 +254,14 @@ export default function TambahDonasi() {
                         <button
                             type="button"
                             onClick={() => navigate("/dashboard/donatur")}
-                            className="px-6 py-3 mr-4 font-bold text-gray-600 hover:text-gray-900 transition-colors"
+                            className="cursor-pointer px-6 py-3 mr-4 font-bold text-gray-600 hover:text-gray-900 transition-colors"
                         >
                             Batal
                         </button>
                         <button
                             type="submit"
                             disabled={loading || success}
-                            className="bg-orange-600 text-white font-bold px-8 py-3 rounded-xl hover:bg-orange-700 transition-all shadow-md shadow-orange-500/30 disabled:opacity-70 flex items-center gap-2"
+                            className="cursor-pointer bg-orange-600 text-white font-bold px-8 py-3 rounded-xl hover:bg-orange-700 transition-all shadow-md shadow-orange-500/30 disabled:opacity-70 flex items-center gap-2"
                         >
                             {loading ? (
                                 <><div className="w-5 h-5 border-2 border-white/50 border-t-white rounded-full animate-spin"></div> Menyimpan...</>

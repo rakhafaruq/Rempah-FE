@@ -12,10 +12,6 @@ export default function HowItWorks() {
                 </div>
                 <div className="max-w-4xl mx-auto px-6 text-center">
                     <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm text-green-800 px-5 py-2 rounded-full text-sm font-semibold border border-green-100 shadow-sm mb-6">
-                        <span className="relative flex h-2.5 w-2.5">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-orange-500"></span>
-                        </span>
                         <span>Panduan Lengkap Platform</span>
                     </div>
                     <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 tracking-tighter mb-6 leading-tight">
@@ -40,7 +36,7 @@ export default function HowItWorks() {
                             {
                                 num: "1",
                                 color: "orange",
-                                title: "Partner Surplus",
+                                title: "Mitra Donasi",
                                 desc: "Restoran dan kafe mendaftarkan makanan layak konsumsi sisa hari ini.",
                                 icon: (
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -49,7 +45,7 @@ export default function HowItWorks() {
                             {
                                 num: "2",
                                 color: "teal",
-                                title: "Quick Rescue",
+                                title: "Relawan Pangan",
                                 desc: "Relawan dan pahlawan pangan mendapat notifikasi dan mengklaim makanan via platform real-time kami.",
                                 icon: (
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -144,7 +140,6 @@ export default function HowItWorks() {
                             <div className="space-y-6">
                                 {[
                                     { icon: "📸", label: "Foto & Upload", desc: "Foto makanan, isi detail & lokasi penjemputan" },
-                                    { icon: "📡", label: "Broadcast Otomatis", desc: "Sistem kirim notifikasi ke relawan terdekat" },
                                     { icon: "✅", label: "Konfirmasi Klaim", desc: "Relawan klaim — Anda mendapat notifikasi" },
                                     { icon: "🤝", label: "Serahkan & Selesai", desc: "Makanan diserahkan, dampak tercatat di dashboard" },
                                 ].map((step, i) => (
@@ -176,7 +171,6 @@ export default function HowItWorks() {
                         <div className="order-2 lg:order-1 bg-gradient-to-br from-green-50 to-green-100/50 rounded-[2.5rem] p-10 border border-green-100">
                             <div className="space-y-6">
                                 {[
-                                    { icon: "🔔", label: "Terima Notifikasi", desc: "Notif real-time donasi baru di area Anda" },
                                     { icon: "📋", label: "Klaim Donasi", desc: "Booking makanan agar donatur tahu Anda menuju lokasi" },
                                     { icon: "🛵", label: "Jemput Makanan", desc: "Datang ke lokasi donatur sesuai waktu yang disepakati" },
                                     { icon: "🏠", label: "Distribusikan", desc: "Salurkan ke yayasan atau warga membutuhkan & upload bukti" },

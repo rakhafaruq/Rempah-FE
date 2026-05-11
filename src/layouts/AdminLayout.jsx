@@ -1,13 +1,31 @@
+import { useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast"; // Import toast
 import { useAuth } from "../context/AuthContext";
 
 export default function AdminLayout() {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
 
-    const handleLogout = async () => {
-        await logout();
-        navigate("/");
+    // State untuk Modal Logout
+    const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+    const executeLogout = async () => {
+        setIsLoggingOut(true);
+        toast.promise(
+            logout(), // Panggil fungsi logout dari context
+            {
+                loading: 'Proses keluar...',
+                success: 'Berhasil keluar. Sampai jumpa!',
+                error: 'Terjadi kesalahan saat keluar.',
+            }
+        ).then(() => {
+            navigate("/"); // Arahkan ke beranda jika berhasil
+        }).finally(() => {
+            setIsLoggingOut(false);
+            setIsLogoutModalOpen(false);
+        });
     };
 
     const isDonatur = user?.role === "donatur";
@@ -26,9 +44,9 @@ export default function AdminLayout() {
     const menus = isDonatur ? donaturMenus : relawanMenus;
 
     return (
-        <div className="h-screen flex bg-stone-100 font-sans overflow-hidden">
+        <div className="h-screen flex bg-stone-100 font-sans overflow-hidden relative">
             {/* Sidebar */}
-            <aside className="w-64 h-screen bg-green-900 flex flex-col shadow-2xl flex-shrink-0">
+            <aside className="w-64 h-screen bg-green-900 flex flex-col shadow-2xl flex-shrink-0 z-10">
                 <div className="p-6 border-b border-green-800">
                     <Link to="/" className="text-2xl font-extrabold text-white tracking-tight">REMPAH</Link>
                     <p className="text-green-400 text-xs mt-1 font-medium">Rescue Makanan Penuh Berkah</p>
@@ -56,10 +74,10 @@ export default function AdminLayout() {
                     ))}
                 </nav>
 
-                {/* Logout */}
+                {/* Logout Button (Trigger Modal) */}
                 <div className="p-4 border-t border-green-800">
-                    <button onClick={handleLogout}
-                        className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-300 hover:text-white hover:bg-red-700/50 transition-all duration-200 font-medium text-sm">
+                    <button onClick={() => setIsLogoutModalOpen(true)}
+                        className="w-full cursor-pointer flex items-center gap-3 px-4 py-3 rounded-xl text-red-300 hover:text-white hover:bg-red-700/50 transition-all duration-200 font-medium text-sm">
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                         </svg>
@@ -72,6 +90,45 @@ export default function AdminLayout() {
             <main className="flex-1 overflow-auto">
                 <Outlet />
             </main>
+
+            {/* MODAL KONFIRMASI LOGOUT */}
+            {isLogoutModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
+                    <div 
+                        className="absolute inset-0 bg-gray-900/40 backdrop-blur-sm transition-opacity" 
+                        onClick={!isLoggingOut ? () => setIsLogoutModalOpen(false) : undefined}
+                    ></div>
+                    
+                    <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 max-w-md w-full relative z-10">
+                        <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center text-3xl mb-5 mx-auto">
+                            🚪
+                        </div>
+                        <h3 className="text-2xl font-bold text-center text-gray-900 mb-2">Yakin Ingin Keluar?</h3>
+                        <p className="text-center text-gray-600 mb-6 leading-relaxed">
+                            Sesi Anda akan diakhiri dan Anda harus masuk kembali untuk mengelola atau mengklaim donasi makanan.
+                        </p>
+                        
+                        <div className="flex flex-col sm:flex-row gap-3 mt-4">
+                            <button 
+                                onClick={() => setIsLogoutModalOpen(false)}
+                                disabled={isLoggingOut}
+                                className="flex-1 py-3 px-4 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-colors disabled:opacity-50"
+                            >
+                                Batal
+                            </button>
+                            <button 
+                                onClick={executeLogout}
+                                disabled={isLoggingOut}
+                                className="flex-1 py-3 px-4 bg-red-600 text-white font-bold rounded-xl hover:bg-red-700 transition-colors shadow-lg shadow-red-200 flex justify-center items-center gap-2 disabled:opacity-70"
+                            >
+                                {isLoggingOut ? (
+                                    <><div className="w-5 h-5 border-2 border-white/50 border-t-white rounded-full animate-spin"></div> Memproses...</>
+                                ) : "Ya, Keluar Akun"}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

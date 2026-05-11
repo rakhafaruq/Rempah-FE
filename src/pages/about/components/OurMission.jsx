@@ -47,7 +47,7 @@ export default function OurMission() {
                             </svg>
                         </div>
                         <span className="text-green-300 font-bold text-sm uppercase tracking-widest">Visi Kami</span>
-                        <h3 className="text-2xl font-extrabold text-white mt-2 mb-4">Indonesia Bebas Food Waste 2030</h3>
+                        <h3 className="text-2xl font-extrabold text-white mt-2 mb-4">Indonesia Bebas Food Waste</h3>
                         <p className="text-green-200 leading-relaxed text-lg">
                             Menjadi platform penyelamatan makanan nomor satu di Indonesia dengan jaringan donatur dan
                             relawan aktif di setiap kota, sehingga tidak ada lagi makanan layak konsumsi yang

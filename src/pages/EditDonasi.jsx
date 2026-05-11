@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import api from "../services/api";
 
 export default function EditDonasi() {
@@ -17,7 +18,7 @@ export default function EditDonasi() {
         pickup_deadline: "",
         total_portion: 1,
     });
-    
+
     const [photo, setPhoto] = useState(null);
     const [previewUrl, setPreviewUrl] = useState(null);
     const [isDragging, setIsDragging] = useState(false);
@@ -25,14 +26,12 @@ export default function EditDonasi() {
     useEffect(() => {
         // Fetch existing donation
         api.get("/donor/donations")
-            .then(res => {
-                const donation = res.data.find(d => d.id === parseInt(id));
+            .then((res) => {
+                const donation = res.data.find((d) => d.id === parseInt(id));
                 if (donation) {
-                    // Format datetime back to datetime-local format (Y-m-dTH:i)
-                    // Backend returns: 2026-05-10 12:30:00 -> we need 2026-05-10T12:30
                     let formattedDate = "";
                     if (donation.pickup_deadline) {
-                        formattedDate = donation.pickup_deadline.replace(' ', 'T').substring(0, 16);
+                        formattedDate = donation.pickup_deadline.replace(" ", "T").substring(0, 16);
                     }
 
                     setForm({
@@ -50,7 +49,7 @@ export default function EditDonasi() {
                     setError("Donasi tidak ditemukan.");
                 }
             })
-            .catch(err => {
+            .catch((err) => {
                 setError("Gagal mengambil data donasi.");
                 console.error(err);
             })
@@ -109,24 +108,34 @@ export default function EditDonasi() {
 
         try {
             const formData = new FormData();
-            formData.append("_method", "PUT"); // Method spoofing untuk Laravel
             formData.append("title", form.title);
             formData.append("description", form.description);
             formData.append("location", form.location);
-            
-            const formattedDate = form.pickup_deadline.replace('T', ' ') + ':00';
+
+            const formattedDate = form.pickup_deadline.replace("T", " ") + ":00";
             formData.append("pickup_deadline", formattedDate);
             formData.append("total_portion", form.total_portion);
-            
+
             if (photo) {
                 formData.append("photo", photo);
             }
 
-            await api.post(`/donations/${id}`, formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
+            toast.promise(
+                api.post(`/donations/${id}`, formData, {
+                    headers: { "Content-Type": "multipart/form-data" },
+                }),
+                {
+                    loading: "Menyimpan perubahan donasi...",
+                    success: () => {
+                        navigate("/donasi/saya");
+                        return "Donasi berhasil diperbarui!";
+                    },
+                    error: (err) => {
+                        console.error("Detail Error:", err);
+                        return err?.response?.data?.message || "Gagal menyimpan perubahan. Pastikan isian form valid.";
+                    },
                 },
-            });
+            );
 
             setSuccess(true);
             setTimeout(() => {
@@ -134,9 +143,7 @@ export default function EditDonasi() {
             }, 2000);
         } catch (err) {
             const errData = err?.response?.data;
-            const msg = errData?.errors 
-                ? Object.values(errData.errors).flat().join(", ") 
-                : errData?.message || "Terjadi kesalahan saat memperbarui donasi.";
+            const msg = errData?.errors ? Object.values(errData.errors).flat().join(", ") : errData?.message || "Terjadi kesalahan saat memperbarui donasi.";
             setError(msg);
         } finally {
             setLoading(false);
@@ -147,16 +154,17 @@ export default function EditDonasi() {
     const labelClass = "block text-sm font-semibold text-gray-700 mb-2";
 
     if (fetching) {
-        return <div className="p-8 flex items-center gap-3 text-gray-500"><div className="w-6 h-6 border-2 border-orange-400 border-t-transparent rounded-full animate-spin"></div>Memuat data donasi...</div>;
+        return (
+            <div className="p-8 flex items-center gap-3 text-gray-500">
+                <div className="w-6 h-6 border-2 border-orange-400 border-t-transparent rounded-full animate-spin"></div>Memuat data donasi...
+            </div>
+        );
     }
 
     return (
         <div className="p-8 max-w-4xl mx-auto">
             <div className="mb-8 flex items-center gap-4">
-                <button 
-                    onClick={() => navigate("/donasi/saya")}
-                    className="p-2 bg-white rounded-full border border-gray-200 hover:bg-gray-50 transition-colors text-gray-500"
-                >
+                <button onClick={() => navigate("/donasi/saya")} className="p-2 bg-white rounded-full border border-gray-200 hover:bg-gray-50 transition-colors text-gray-500">
                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
@@ -170,77 +178,40 @@ export default function EditDonasi() {
             <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
                 {success && (
                     <div className="mb-6 p-4 bg-green-50 text-green-700 border border-green-200 rounded-2xl flex items-center gap-3 font-medium">
-                        <svg className="w-6 h-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                        <svg className="w-6 h-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
                         Donasi berhasil diperbarui! Mengarahkan kembali...
                     </div>
                 )}
 
-                {error && (
-                    <div className="mb-6 p-4 bg-red-50 text-red-700 border border-red-200 rounded-2xl font-medium">
-                        {error}
-                    </div>
-                )}
+                {error && <div className="mb-6 p-4 bg-red-50 text-red-700 border border-red-200 rounded-2xl font-medium">{error}</div>}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="md:col-span-2">
                             <label className={labelClass}>Nama Makanan / Judul</label>
-                            <input 
-                                type="text" 
-                                name="title" 
-                                value={form.title} 
-                                onChange={handleChange} 
-                                required 
-                                className={inputClass} 
-                            />
+                            <input type="text" name="title" value={form.title} onChange={handleChange} required className={inputClass} />
                         </div>
 
                         <div className="md:col-span-2">
                             <label className={labelClass}>Deskripsi Tambahan</label>
-                            <textarea 
-                                name="description" 
-                                value={form.description} 
-                                onChange={handleChange} 
-                                rows={3} 
-                                className={`${inputClass} resize-none`} 
-                            />
+                            <textarea name="description" value={form.description} onChange={handleChange} rows={3} className={`${inputClass} resize-none`} />
                         </div>
 
                         <div className="md:col-span-2">
                             <label className={labelClass}>Lokasi Pengambilan Lengkap</label>
-                            <input 
-                                type="text" 
-                                name="location" 
-                                value={form.location} 
-                                onChange={handleChange} 
-                                required 
-                                className={inputClass} 
-                            />
+                            <input type="text" name="location" value={form.location} onChange={handleChange} required className={inputClass} />
                         </div>
 
                         <div>
                             <label className={labelClass}>Batas Waktu Pengambilan</label>
-                            <input 
-                                type="datetime-local" 
-                                name="pickup_deadline" 
-                                value={form.pickup_deadline} 
-                                onChange={handleChange} 
-                                required 
-                                className={inputClass} 
-                            />
+                            <input type="datetime-local" name="pickup_deadline" value={form.pickup_deadline} onChange={handleChange} required className={inputClass} />
                         </div>
 
                         <div>
                             <label className={labelClass}>Jumlah Porsi</label>
-                            <input 
-                                type="number" 
-                                name="total_portion" 
-                                min="1" 
-                                value={form.total_portion} 
-                                onChange={handleChange} 
-                                required 
-                                className={inputClass} 
-                            />
+                            <input type="number" name="total_portion" min="1" value={form.total_portion} onChange={handleChange} required className={inputClass} />
                         </div>
 
                         <div className="md:col-span-2">
@@ -248,13 +219,14 @@ export default function EditDonasi() {
                             {previewUrl ? (
                                 <div className="mt-1 relative rounded-2xl overflow-hidden border-2 border-gray-200">
                                     <img src={previewUrl} alt="Preview" className="w-full h-64 object-cover" />
-                                    <button
-                                        type="button"
-                                        onClick={handleRemovePhoto}
-                                        className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-xl shadow-lg transition-colors flex items-center gap-2"
-                                    >
+                                    <button type="button" onClick={handleRemovePhoto} className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-xl shadow-lg transition-colors flex items-center gap-2">
                                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                                            />
                                         </svg>
                                         <span className="font-medium text-sm">Hapus / Ganti Foto</span>
                                     </button>
@@ -271,7 +243,12 @@ export default function EditDonasi() {
                                 >
                                     <div className="space-y-1 text-center pointer-events-none">
                                         <svg className={`mx-auto h-12 w-12 ${isDragging ? "text-orange-500" : "text-gray-400"}`} stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                            <path
+                                                d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            />
                                         </svg>
                                         <div className="flex text-sm text-gray-600 justify-center items-center">
                                             <span className="font-medium text-orange-600 bg-white px-2 py-0.5 rounded-md">Unggah file baru</span>
@@ -286,11 +263,7 @@ export default function EditDonasi() {
                     </div>
 
                     <div className="pt-4 border-t border-gray-100 flex justify-end">
-                        <button
-                            type="button"
-                            onClick={() => navigate("/donasi/saya")}
-                            className="px-6 py-3 mr-4 font-bold text-gray-600 hover:text-gray-900 transition-colors"
-                        >
+                        <button type="button" onClick={() => navigate("/donasi/saya")} className="px-6 py-3 mr-4 font-bold text-gray-600 hover:text-gray-900 transition-colors">
                             Batal
                         </button>
                         <button
@@ -299,8 +272,12 @@ export default function EditDonasi() {
                             className="bg-orange-600 text-white font-bold px-8 py-3 rounded-xl hover:bg-orange-700 transition-all shadow-md shadow-orange-500/30 disabled:opacity-70 flex items-center gap-2"
                         >
                             {loading ? (
-                                <><div className="w-5 h-5 border-2 border-white/50 border-t-white rounded-full animate-spin"></div> Menyimpan...</>
-                            ) : "Simpan Perubahan"}
+                                <>
+                                    <div className="w-5 h-5 border-2 border-white/50 border-t-white rounded-full animate-spin"></div> Menyimpan...
+                                </>
+                            ) : (
+                                "Simpan Perubahan"
+                            )}
                         </button>
                     </div>
                 </form>

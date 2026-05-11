@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
+import { Toaster } from "react-hot-toast";
 
 import MainLayout from "./layouts/MainLayout";
 import AdminLayout from "./layouts/AdminLayout";
@@ -25,6 +26,7 @@ function App() {
 
     return (
         <>
+            <Toaster position="top-center" reverseOrder={false} />
             <ScrollToTop />
             <Routes>
                 {/* ===================== PUBLIC ROUTES ===================== */}

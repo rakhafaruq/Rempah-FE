@@ -15,14 +15,6 @@ export default function Home() {
 
                         {/* LEFT: Text */}
                         <div>
-                            <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-md text-green-800 px-5 py-2 rounded-full text-sm font-semibold border border-green-100 shadow-sm mb-8">
-                                <span className="relative flex h-2.5 w-2.5">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-orange-500"></span>
-                                </span>
-                                <span>Live Rescue Feed Active</span>
-                            </div>
-
                             <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 tracking-tighter mb-6 leading-[1.1]">
                                 Selamatkan Makanan,{" "}
                                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-green-700">
@@ -38,13 +30,13 @@ export default function Home() {
                                 <Link to="/register" className="relative group overflow-hidden bg-orange-600 text-white font-semibold px-8 py-4 rounded-2xl shadow-xl shadow-orange-600/30 hover:-translate-y-1 transition-all duration-300 inline-flex items-center gap-2 border border-orange-500">
                                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full duration-700 transition-transform"></div>
                                     <span className="relative flex items-center gap-2">
-                                        Start Rescuing
+                                        Mulai Menyelamatkan
                                         <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                     </span>
                                 </Link>
-                                <Link to="/register?role=partner" className="text-green-800 font-semibold px-8 py-4 rounded-2xl border border-green-200 hover:border-green-400 hover:bg-green-50 transition-all duration-300 inline-flex items-center gap-2">
-                                    Partner with Us
-                                </Link>
+                                {/* <Link to="/register?role=partner" className="text-green-800 font-semibold px-8 py-4 rounded-2xl border border-green-200 hover:border-green-400 hover:bg-green-50 transition-all duration-300 inline-flex items-center gap-2">
+                                    Jadilah Mitra
+                                </Link> */}
                             </div>
                         </div>
 
@@ -178,7 +170,7 @@ export default function Home() {
                 <div className="absolute top-1/2 left-0 w-full h-[400px] -translate-y-1/2 bg-gradient-to-r from-orange-50/50 via-green-50/30 to-teal-50/50 -skew-y-3 -z-10"></div>
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">How It Works</h2>
+                        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">Bagaimana Caranya?</h2>
                         <p className="text-lg text-gray-600 max-w-2xl mx-auto font-medium">
                             Tiga langkah sederhana untuk menyelamatkan makanan dan menyebarkan berkah kepada yang membutuhkan.
                         </p>

@@ -17,7 +17,7 @@ const ACTIVE_PARTNERS = [
         badgeColor: "bg-yellow-100 text-yellow-700 border-yellow-200",
         accentColor: "from-orange-500 to-amber-500",
         emoji: "🍞",
-        tags: ["Roti Segar", "Donasi Harian", "Sore Hari"],
+        tags: ["Roti Segar"],
         isFeatured: true,
     },
 ];
@@ -108,7 +108,6 @@ export default function Partners() {
                                             Ciwastra, Bandung
                                         </div>
                                     </div>
-                                    <span className="hidden md:block text-5xl">✨</span>
                                 </div>
 
                                 <p className="text-green-100 leading-relaxed mb-6 text-base">
@@ -119,7 +118,7 @@ export default function Partners() {
 
                                 {/* Tags */}
                                 <div className="flex flex-wrap gap-2 mb-8">
-                                    {["Roti Segar", "Donasi Harian", "Setiap Sore", "100% Gratis"].map((tag) => (
+                                    {["Roti Segar", "100% Gratis"].map((tag) => (
                                         <span key={tag} className="bg-white/10 border border-white/20 text-white/90 text-xs font-semibold px-3 py-1.5 rounded-full">
                                             {tag}
                                         </span>
@@ -199,7 +198,7 @@ export default function Partners() {
                             {
                                 icon: "📊",
                                 title: "Dashboard Dampak",
-                                desc: "Lihat secara real-time berapa banyak makanan yang sudah Anda selamatkan, siapa yang terbantu, dan dampak CO2 yang dihindari.",
+                                desc: "Lihat secara real-time berapa banyak makanan yang sudah Anda selamatkan dan siapa yang terbantu.",
                                 color: "bg-teal-50 border-teal-100",
                                 iconBg: "bg-teal-100",
                             },
@@ -209,21 +208,7 @@ export default function Partners() {
                                 desc: "Tidak ada biaya apapun. Anda cukup mendaftarkan makanan surplus, dan relawan kami yang akan datang menjemput.",
                                 color: "bg-blue-50 border-blue-100",
                                 iconBg: "bg-blue-100",
-                            },
-                            {
-                                icon: "🏅",
-                                title: "Sertifikat & Penghargaan",
-                                desc: "Mitra aktif mendapatkan sertifikat digital sebagai bukti kontribusi sosial yang bisa digunakan untuk kebutuhan CSR perusahaan.",
-                                color: "bg-yellow-50 border-yellow-100",
-                                iconBg: "bg-yellow-100",
-                            },
-                            {
-                                icon: "🌱",
-                                title: "Bangun Komunitas",
-                                desc: "Menjadi bagian dari ekosistem mitra Rempah yang terus berkembang — bersama bisnis-bisnis lain yang satu visi dengan Anda.",
-                                color: "bg-purple-50 border-purple-100",
-                                iconBg: "bg-purple-100",
-                            },
+                            }
                         ].map((b) => (
                             <div key={b.title} className={`${b.color} border rounded-3xl p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300`}>
                                 <div className={`w-14 h-14 ${b.iconBg} rounded-2xl flex items-center justify-center text-2xl mb-5`}>
@@ -300,41 +285,6 @@ export default function Partners() {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* CTA BAWAH */}
-            <section className="relative py-24 overflow-hidden">
-                <div className="absolute inset-0 bg-[#2C4A1B]">
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-green-600/20 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3"></div>
-                    <div className="absolute bottom-0 left-0 w-96 h-96 bg-orange-500/15 rounded-full blur-3xl -translate-x-1/3 translate-y-1/3"></div>
-                </div>
-                <div className="max-w-3xl mx-auto px-6 relative z-10 text-center">
-                    <p className="text-orange-300 font-bold text-sm uppercase tracking-widest mb-4">Buka untuk Semua Bisnis</p>
-                    <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-5 tracking-tight leading-tight">
-                        Bisnis Anda Bisa Jadi{" "}
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-yellow-400">
-                            Mitra Selanjutnya
-                        </span>
-                    </h2>
-                    <p className="text-green-100 text-xl mb-10 font-medium leading-relaxed">
-                        Restoran, kafe, bakery, katering, hotel — siapa pun yang memiliki surplus makanan layak konsumsi bisa bergabung. Tidak ada syarat minimum.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Link
-                            to="/register"
-                            className="inline-flex items-center justify-center gap-2 bg-orange-500 text-white font-bold px-10 py-4 rounded-2xl shadow-xl hover:bg-orange-400 hover:-translate-y-1 transition-all duration-300 border border-orange-400/50"
-                        >
-                            Mulai sebagai Mitra
-                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                        </Link>
-                        <Link
-                            to="/how-it-works"
-                            className="inline-flex items-center justify-center gap-2 bg-white/10 text-white font-bold px-10 py-4 rounded-2xl border border-white/20 hover:bg-white/20 hover:-translate-y-1 transition-all duration-300 backdrop-blur-sm"
-                        >
-                            Pelajari Cara Kerjanya
-                        </Link>
                     </div>
                 </div>
             </section>
