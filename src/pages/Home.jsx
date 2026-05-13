@@ -52,33 +52,11 @@ export default function Home() {
                                         <h3 className="text-white text-2xl font-extrabold mt-1">REMPAH</h3>
                                         <p className="text-orange-100 text-sm font-medium">Rescue Makanan Penuh Berkah.</p>
                                     </div>
-                                    <div className="relative z-10 rounded-2xl overflow-hidden mb-5 aspect-video">
+                                    <div className="relative z-10 rounded-2xl overflow-hidden aspect-video">
                                         <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fresh vegetables" className="w-full h-full object-cover" />
                                     </div>
-                                    <div className="relative z-10 flex gap-3">
-                                        <button className="flex-1 bg-white/20 text-white text-sm font-semibold py-2.5 rounded-xl border border-white/30">Klaim</button>
-                                        <button className="flex-1 bg-white text-orange-600 text-sm font-semibold py-2.5 rounded-xl">Detail →</button>
-                                    </div>
                                 </div>
-                                {/* Floating badges */}
-                                <div className="absolute -bottom-4 -left-6 bg-white rounded-2xl px-4 py-3 shadow-xl border border-gray-100 flex items-center gap-3">
-                                    <div className="w-9 h-9 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                                        <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                                    </div>
-                                    <div>
-                                        <p className="text-xs text-gray-500">Terselamatkan</p>
-                                        <p className="text-sm font-extrabold text-gray-900">500+ Meals</p>
-                                    </div>
-                                </div>
-                                <div className="absolute -top-4 -right-4 bg-white rounded-2xl px-4 py-3 shadow-xl border border-gray-100 flex items-center gap-3">
-                                    <div className="w-9 h-9 bg-orange-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                                        <svg className="w-5 h-5 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                                    </div>
-                                    <div>
-                                        <p className="text-xs text-gray-500">Partners</p>
-                                        <p className="text-sm font-extrabold text-gray-900">50+ Mitra</p>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>

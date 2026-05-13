@@ -140,26 +140,7 @@ export default function Partners() {
                         </div>
                     </div>
 
-                    {/* Coming soon slots */}
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                        {[
-                            { emoji: "🍽️", label: "Restoran Berikutnya?" },
-                            { emoji: "☕", label: "Kafe Berikutnya?" },
-                            { emoji: "🎂", label: "Katering Berikutnya?" },
-                        ].map((slot) => (
-                            <div key={slot.label} className="bg-white border-2 border-dashed border-gray-200 rounded-3xl p-8 flex flex-col items-center justify-center text-center group hover:border-orange-300 hover:bg-orange-50/50 transition-all duration-300 cursor-pointer min-h-[180px]">
-                                <div className="text-4xl mb-3 grayscale group-hover:grayscale-0 transition-all duration-300">
-                                    {slot.emoji}
-                                </div>
-                                <p className="font-bold text-gray-400 group-hover:text-orange-600 transition-colors text-sm">
-                                    {slot.label}
-                                </p>
-                                <p className="text-gray-300 text-xs mt-1 group-hover:text-orange-400 transition-colors">
-                                    Slot terbuka untuk bisnis Anda
-                                </p>
-                            </div>
-                        ))}
-                    </div>
+
                 </div>
             </section>
 
