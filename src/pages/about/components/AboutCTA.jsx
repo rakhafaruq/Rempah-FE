@@ -34,7 +34,7 @@ export default function AboutCTA() {
                         </svg>
                     </Link>
                     <Link
-                        to="/register?role=volunteer"
+                        to="/register"
                         className="inline-flex items-center justify-center gap-2 bg-white text-green-800 border-2 border-green-700 font-bold px-9 py-4 rounded-2xl hover:bg-green-50 hover:-translate-y-0.5 transition-all duration-300 text-lg"
                     >
                         Daftar sebagai Relawan

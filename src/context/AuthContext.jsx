@@ -6,9 +6,8 @@ const AuthContext = createContext(null);
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
-    const [loading, setLoading] = useState(true); // cek localStorage dulu saat mount
+    const [loading, setLoading] = useState(true);
 
-    // Load dari localStorage saat pertama kali app dibuka
     useEffect(() => {
         const storedToken = localStorage.getItem("rempah_token");
         const storedUser = localStorage.getItem("rempah_user");

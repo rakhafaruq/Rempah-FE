@@ -28,7 +28,6 @@ export default function DashboardDonatur() {
 
     return (
         <div className="p-8">
-            {/* Header */}
             <div className="mb-8">
                 <h1 className="text-3xl font-extrabold text-gray-900">Halo, {user?.name}! 👋</h1>
                 <p className="text-gray-500 mt-1 font-medium">Selamat datang di dashboard donatur Anda.</p>
@@ -46,7 +45,6 @@ export default function DashboardDonatur() {
                 </div>
             ) : (
                 <>
-                    {/* Stats Cards */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                         {stats.map((s) => (
                             <div key={s.label} className="bg-white rounded-3xl p-6 shadow-md shadow-gray-100 border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
@@ -63,7 +61,6 @@ export default function DashboardDonatur() {
                         ))}
                     </div>
 
-                    {/* Aksi Cepat */}
                     <div className="bg-gradient-to-r from-orange-50 to-orange-100/50 border border-orange-200 rounded-3xl p-6 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                         <div>
                             <h3 className="font-bold text-gray-900 text-lg">Punya makanan berlebih hari ini?</h3>
@@ -81,12 +78,55 @@ export default function DashboardDonatur() {
                     <div>
                         <h2 className="text-xl font-extrabold text-gray-900 mb-4">Bukti Distribusi Terbaru</h2>
                         {data?.gallery?.length > 0 ? (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                                 {data.gallery.map((item, i) => (
-                                    <div key={i} className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                                        {item.photo_path && <img src={item.photo_path} alt="Bukti distribusi" className="w-full h-40 object-cover rounded-xl mb-3" />}
-                                        <p className="text-gray-600 text-sm font-medium">{item.description ?? "Distribusi berhasil dilakukan."}</p>
-                                        <p className="text-gray-400 text-xs mt-2">{new Date(item.created_at).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}</p>
+                                    <div key={i} className="bg-white rounded-[2rem] p-4 border border-gray-100 shadow-md shadow-gray-200/40 hover:shadow-xl hover:shadow-gray-200/60 hover:-translate-y-1.5 transition-all duration-300 flex flex-col group">
+                                        
+                                        <div className="relative rounded-[1.5rem] overflow-hidden mb-5 bg-gray-100">
+                                            {item.photo_path ? (
+                                                <img 
+                                                    src={item.photo_path} 
+                                                    alt="Bukti distribusi" 
+                                                    className="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
+                                                />
+                                            ) : (
+                                                <div className="w-full aspect-[4/5] flex items-center justify-center text-gray-400">
+                                                    <svg className="w-12 h-12 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                                </div>
+                                            )}
+                                            <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm text-[10px] font-bold text-gray-700 flex items-center gap-1">
+                                                <svg className="w-3 h-3 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                                {new Date(item.created_at).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" })}
+                                            </div>
+                                        </div>
+
+                                        <div className="flex-1 px-1 flex flex-col">
+                                            <p className="text-gray-900 text-sm font-semibold leading-relaxed mb-4 italic line-clamp-3 relative">
+                                                <span className="text-3xl text-orange-200 absolute -top-2 -left-1 font-serif leading-none">"</span>
+                                                <span className="relative z-10 pl-2">{item.story ?? "Distribusi berhasil dilakukan dengan lancar."}</span>
+                                            </p>
+                                            
+                                            <div className="space-y-2.5 mt-auto bg-stone-50/80 border border-stone-100 rounded-2xl p-3.5">
+                                                <div className="flex gap-2.5 text-xs">
+                                                    <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center shrink-0">
+                                                        <svg className="w-3.5 h-3.5 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                                                    </div>
+                                                    <div className="flex flex-col">
+                                                        <span className="text-gray-400 text-[10px] font-bold uppercase tracking-wider">Diterima Oleh</span>
+                                                        <span className="text-gray-800 font-medium leading-snug">{item.receiver_name} <span className="text-gray-500 font-normal">({item.receiver_type})</span></span>
+                                                    </div>
+                                                </div>
+                                                <div className="flex gap-2.5 text-xs">
+                                                    <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center shrink-0">
+                                                        <svg className="w-3.5 h-3.5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                                                    </div>
+                                                    <div className="flex flex-col">
+                                                        <span className="text-gray-400 text-[10px] font-bold uppercase tracking-wider">Relawan</span>
+                                                        <span className="text-gray-800 font-medium leading-snug">{item.claim?.volunteer?.name ?? 'Anonim'}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 ))}
                             </div>

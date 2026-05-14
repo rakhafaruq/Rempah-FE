@@ -92,7 +92,7 @@ export default function DashboardRelawan() {
                                         </div>
                                         <div className="text-right flex flex-col items-end gap-2">
                                             <span className="bg-orange-100 text-orange-700 text-xs font-bold px-3 py-1.5 rounded-full inline-block">Sedang Berlangsung</span>
-                                            <Link to={`/distribusi/baru/${klaim.id}`} className="text-sm bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl font-bold transition-colors shadow-sm">
+                                            <Link to={`/distribusi/baru/${klaim.id}`} className="cursor-pointer text-sm bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl font-bold transition-colors shadow-sm">
                                                 Selesaikan Distribusi
                                             </Link>
                                         </div>

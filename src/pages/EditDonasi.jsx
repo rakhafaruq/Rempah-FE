@@ -24,7 +24,6 @@ export default function EditDonasi() {
     const [isDragging, setIsDragging] = useState(false);
 
     useEffect(() => {
-        // Fetch existing donation
         api.get("/donor/donations")
             .then((res) => {
                 const donation = res.data.find((d) => d.id === parseInt(id));
@@ -155,8 +154,8 @@ export default function EditDonasi() {
 
     if (fetching) {
         return (
-            <div className="p-8 flex items-center gap-3 text-gray-500">
-                <div className="w-6 h-6 border-2 border-orange-400 border-t-transparent rounded-full animate-spin"></div>Memuat data donasi...
+            <div className="p-8 flex justify-center items-center min-h-[400px]">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-orange-500"></div>
             </div>
         );
     }

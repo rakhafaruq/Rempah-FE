@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 export default function Home() {
     return (
         <div className="w-full bg-stone-50 overflow-hidden font-sans">
-            {/* 1. HERO SECTION — 2 Column */}
             <section className="relative pt-28 pb-36 overflow-hidden">
                 <div className="absolute top-0 inset-x-0 h-full w-full overflow-hidden -z-10 pointer-events-none">
                     <div className="absolute -top-40 right-0 w-[500px] h-[500px] bg-orange-200/40 rounded-full blur-3xl"></div>
@@ -34,9 +33,6 @@ export default function Home() {
                                         <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                     </span>
                                 </Link>
-                                {/* <Link to="/register?role=partner" className="text-green-800 font-semibold px-8 py-4 rounded-2xl border border-green-200 hover:border-green-400 hover:bg-green-50 transition-all duration-300 inline-flex items-center gap-2">
-                                    Jadilah Mitra
-                                </Link> */}
                             </div>
                         </div>
 
@@ -198,10 +194,6 @@ export default function Home() {
                                 <p className="text-green-50 text-lg leading-relaxed mb-8">
                                     Toko roti lokal dengan produk roti segar harian. Sisa roti didonasikan 100% gratis kepada relawan untuk diklaim via web, lalu didistribusikan kepada yang membutuhkan.
                                 </p>
-                                <div className="inline-flex items-center space-x-2 bg-[#3A5C28] text-orange-400 px-5 py-3 rounded-xl font-medium border border-[#486E35]">
-                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                    <span>Donasi tersedia setiap sore hari</span>
-                                </div>
                             </div>
                             <div className="bg-[#3A5C28] rounded-3xl p-8 border border-[#486E35] shadow-inner">
                                 <h3 className="text-white font-bold text-xl mb-6 flex items-center">

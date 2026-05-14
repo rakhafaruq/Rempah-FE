@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 export default function HowItWorks() {
     return (
         <div className="w-full bg-stone-50 overflow-hidden font-sans">
-            {/* PAGE HEADER */}
             <section className="relative pt-28 pb-20 overflow-hidden">
                 <div className="absolute inset-0 -z-10 pointer-events-none">
                     <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-orange-50 via-stone-50 to-green-50"></div>
@@ -23,7 +22,7 @@ export default function HowItWorks() {
                     </h1>
                     <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-medium">
                         Sistem kami dirancang agar proses donasi dan distribusi makanan berjalan sangat
-                        cepat, transparan, dan tepat sasaran — dari restoran ke meja makan mereka yang membutuhkan.
+                        cepat, transparan, dan tepat sasaran dari restoran ke meja makan mereka yang membutuhkan.
                     </p>
                 </div>
             </section>
@@ -232,7 +231,7 @@ export default function HowItWorks() {
                                 ))}
                             </ul>
                             <Link
-                                to="/register?role=volunteer"
+                                to="/register"
                                 className="mt-10 inline-flex items-center gap-2 bg-green-700 text-white font-bold px-8 py-4 rounded-2xl shadow-lg shadow-green-200 hover:bg-green-800 hover:-translate-y-0.5 transition-all duration-300"
                             >
                                 Daftar sebagai Relawan

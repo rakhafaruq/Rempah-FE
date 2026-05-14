@@ -77,8 +77,6 @@ export default function TambahDonasi() {
             formData.append("title", form.title);
             formData.append("description", form.description);
             formData.append("location", form.location);
-            // Format datetime-local ke format yang diterima backend (Y-m-d H:i:s)
-            // Di HTML datetime-local: 2026-05-10T12:30 -> Backend: 2026-05-10 12:30:00
             const formattedDate = form.pickup_deadline.replace('T', ' ') + ':00';
             formData.append("pickup_deadline", formattedDate);
             formData.append("total_portion", form.total_portion);

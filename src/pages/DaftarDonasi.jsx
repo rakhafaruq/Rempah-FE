@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import toast from "react-hot-toast"; // Tambahkan import toast
+import toast from "react-hot-toast";
 import api from "../services/api";
 
 export default function DaftarDonasi() {
     const [donations, setDonations] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // State untuk Modal Konfirmasi Hapus
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [donationToDelete, setDonationToDelete] = useState(null);
     const [isDeleting, setIsDeleting] = useState(false);
@@ -24,19 +23,16 @@ export default function DaftarDonasi() {
         fetchDonations();
     }, []);
 
-    // Fungsi untuk membuka modal hapus
     const handleOpenModal = (donasi) => {
         setDonationToDelete(donasi);
         setIsModalOpen(true);
     };
 
-    // Fungsi untuk menutup modal
     const handleCloseModal = () => {
         setIsModalOpen(false);
         setDonationToDelete(null);
     };
 
-    // Fungsi eksekusi hapus dengan toast
     const executeDelete = async () => {
         if (!donationToDelete) return;
 
@@ -46,7 +42,7 @@ export default function DaftarDonasi() {
             .promise(api.delete(`/donations/${donationToDelete.id}`), {
                 loading: "Menghapus donasi...",
                 success: () => {
-                    fetchDonations(); // Refresh list setelah berhasil
+                    fetchDonations();
                     return "Donasi berhasil dihapus!";
                 },
                 error: "Gagal menghapus donasi.",
@@ -113,7 +109,6 @@ export default function DaftarDonasi() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {donations.map((donasi) => (
                         <div key={donasi.id} className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 flex flex-col">
-                            {/* ... (Bagian gambar dan detail lainnya sama persis) ... */}
                             {donasi.photo_url ? (
                                 <img src={donasi.photo_url} alt={donasi.title} className="w-full h-48 object-cover" />
                             ) : (
@@ -180,7 +175,6 @@ export default function DaftarDonasi() {
                 </div>
             ) : (
                 <div className="bg-white rounded-3xl p-12 border border-gray-100 text-center shadow-sm">
-                    {/* ... (Konten kosong donasi) ... */}
                     <div className="w-20 h-20 bg-orange-50 rounded-full flex items-center justify-center mx-auto mb-4">
                         <svg className="w-10 h-10 text-orange-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
@@ -194,7 +188,6 @@ export default function DaftarDonasi() {
                 </div>
             )}
 
-            {/* MODAL KONFIRMASI HAPUS */}
             {isModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
                     <div className="absolute inset-0 bg-gray-900/40 backdrop-blur-sm transition-opacity" onClick={!isDeleting ? handleCloseModal : undefined}></div>

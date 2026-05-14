@@ -1,16 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-/**
- * ProtectedRoute
- * - Jika belum login → redirect ke /login
- * - Jika sudah login tapi role tidak sesuai → redirect ke dashboard role yang tepat
- * - Jika sesuai → render halaman (Outlet)
- */
+
 export default function ProtectedRoute({ role }) {
     const { user, loading } = useAuth();
 
-    // Tunggu cek localStorage selesai dulu
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-stone-50">
@@ -22,12 +16,10 @@ export default function ProtectedRoute({ role }) {
         );
     }
 
-    // Belum login sama sekali
     if (!user) {
         return <Navigate to="/login" replace />;
     }
 
-    // Sudah login tapi role tidak sesuai halaman ini
     if (role && user.role !== role) {
         const redirectTo =
             user.role === "donatur" ? "/dashboard/donatur" : "/dashboard/relawan";

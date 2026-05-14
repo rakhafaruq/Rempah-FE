@@ -101,11 +101,9 @@ export default function Register() {
                                 key={r.value}
                                 className="bg-white rounded-[2rem] overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex flex-col border border-gray-100 cursor-pointer"
                             >
-                                {/* Header Image */}
                                 <div className="h-56 relative bg-gray-100">
                                     <img src={r.image} alt={r.title} className="w-full h-full object-cover" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent top-auto h-24 bottom-0"></div>
-                                    {/* Icon overlapping */}
                                     <div className={`absolute bottom-4 left-8 w-16 h-16 rounded-full ${r.theme.bg} flex items-center justify-center text-white shadow-lg`}>{r.icon}</div>
                                 </div>
 
@@ -132,7 +130,6 @@ export default function Register() {
                 </div>
             ) : (
                 <div className="w-full max-w-2xl relative z-10 mx-auto">
-                    {/* Background decorations for Step 2 */}
                     <div className="absolute -top-20 -right-20 w-96 h-96 bg-orange-200/30 rounded-full blur-3xl -z-10"></div>
                     <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-green-200/30 rounded-full blur-3xl -z-10"></div>
 

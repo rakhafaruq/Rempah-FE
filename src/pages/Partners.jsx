@@ -27,8 +27,6 @@ const CATEGORIES = ["Semua", "Bakery & Roti", "Restoran", "Katering", "Kafe", "H
 export default function Partners() {
     return (
         <div className="w-full bg-stone-50 overflow-hidden font-sans">
-
-            {/* HERO */}
             <section className="relative pt-28 pb-24 overflow-hidden">
                 <div className="absolute inset-0 -z-10">
                     <div className="absolute inset-0 bg-gradient-to-br from-green-50 via-stone-50 to-orange-50"></div>
@@ -55,7 +53,6 @@ export default function Partners() {
                         Bersama mereka, kami membangun ekosistem pangan yang lebih adil.
                     </p>
 
-                    {/* Stat strip */}
                     <div className="inline-grid grid-cols-3 gap-px bg-gray-200 rounded-2xl overflow-hidden shadow-sm border border-gray-100 mb-8">
                         {[
                             { val: "1", label: "Mitra Aktif" },
@@ -80,10 +77,8 @@ export default function Partners() {
                         <div className="h-px flex-1 bg-gray-200"></div>
                     </div>
 
-                    {/* Featured Card — large */}
                     <div className="bg-[#2C4A1B] rounded-[2.5rem] overflow-hidden shadow-2xl shadow-green-900/20 mb-10">
                         <div className="grid md:grid-cols-5">
-                            {/* Left visual */}
                             <div className="md:col-span-2 relative min-h-[280px] bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center p-10">
                                 <div className="absolute inset-0 bg-black/10"></div>
                                 <div className="absolute top-4 left-4">
@@ -98,7 +93,6 @@ export default function Partners() {
                                 </div>
                             </div>
 
-                            {/* Right content */}
                             <div className="md:col-span-3 p-10 text-white">
                                 <div className="flex items-start justify-between mb-4">
                                     <div>
@@ -112,11 +106,10 @@ export default function Partners() {
 
                                 <p className="text-green-100 leading-relaxed mb-6 text-base">
                                     Toko roti lokal yang berkomitmen mendonasikan sisa roti segarnya setiap sore hari. 
-                                    Mereka adalah bisnis pertama yang percaya dan bergabung bersama REMPAH sejak awal — 
+                                    Mereka adalah bisnis pertama yang percaya dan bergabung bersama REMPAH sejak awal
                                     membuktikan bahwa bisnis kecil pun bisa membuat dampak besar.
                                 </p>
 
-                                {/* Tags */}
                                 <div className="flex flex-wrap gap-2 mb-8">
                                     {["Roti Segar", "100% Gratis"].map((tag) => (
                                         <span key={tag} className="bg-white/10 border border-white/20 text-white/90 text-xs font-semibold px-3 py-1.5 rounded-full">
@@ -125,7 +118,6 @@ export default function Partners() {
                                     ))}
                                 </div>
 
-                                {/* Impact */}
                                 <div className="bg-white/10 border border-white/15 rounded-2xl p-5 flex items-center gap-6">
                                     <div className="text-center flex-shrink-0">
                                         <p className="text-4xl font-extrabold text-orange-300">40+</p>
@@ -143,8 +135,6 @@ export default function Partners() {
 
                 </div>
             </section>
-
-            {/* MENGAPA JADI MITRA */}
             <section className="py-24">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center mb-16">
@@ -156,7 +146,7 @@ export default function Partners() {
                             <span className="text-orange-600">Mitra Rempah?</span>
                         </h2>
                         <p className="text-lg text-gray-600 max-w-2xl mx-auto font-medium">
-                            Bergabung bukan hanya tentang donasi — ini tentang menjadi bagian dari gerakan yang lebih besar.
+                            Bergabung bukan hanya tentang donasi ini tentang menjadi bagian dari gerakan yang lebih besar.
                         </p>
                     </div>
 
@@ -190,8 +180,8 @@ export default function Partners() {
                                 color: "bg-blue-50 border-blue-100",
                                 iconBg: "bg-blue-100",
                             }
-                        ].map((b) => (
-                            <div key={b.title} className={`${b.color} border rounded-3xl p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300`}>
+                        ].map((b, i) => (
+                            <div key={b.title} className={`${b.color} border rounded-3xl p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${i === 3 ? "lg:col-start-2" : ""}`}>
                                 <div className={`w-14 h-14 ${b.iconBg} rounded-2xl flex items-center justify-center text-2xl mb-5`}>
                                     {b.icon}
                                 </div>
@@ -202,8 +192,6 @@ export default function Partners() {
                     </div>
                 </div>
             </section>
-
-            {/* CARA DAFTAR */}
             <section className="py-20 bg-white">
                 <div className="max-w-5xl mx-auto px-6">
                     <div className="text-center mb-14">
@@ -244,8 +232,6 @@ export default function Partners() {
                     </div>
                 </div>
             </section>
-
-            {/* QUOTE / TESTIMONIAL */}
             <section className="py-20 bg-stone-50">
                 <div className="max-w-4xl mx-auto px-6">
                     <div className="bg-white rounded-[2.5rem] p-10 md:p-14 shadow-xl border border-gray-100 text-center relative overflow-hidden">

@@ -7,18 +7,15 @@ export default function CariDonasi() {
     const [donations, setDonations] = useState([]);
     const [loading, setLoading] = useState(true);
     
-    // State untuk Pencarian dan Debounce
     const [searchQuery, setSearchQuery] = useState("");
     const [debouncedSearch, setDebouncedSearch] = useState("");
     
-    // State untuk Modal Konfirmasi
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedDonation, setSelectedDonation] = useState(null);
     const [isClaiming, setIsClaiming] = useState(false);
     
     const navigate = useNavigate();
 
-    // 1. EFEK DEBOUNCE
     useEffect(() => {
         const timer = setTimeout(() => {
             setDebouncedSearch(searchQuery);
@@ -26,7 +23,6 @@ export default function CariDonasi() {
         return () => clearTimeout(timer);
     }, [searchQuery]);
 
-    // 2. FETCH DATA
     useEffect(() => {
         fetchDonations(debouncedSearch);
     }, [debouncedSearch]);
@@ -100,28 +96,21 @@ export default function CariDonasi() {
             {/* SKELETON LOADING (Pengganti Spinner) */}
             {loading ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {/* Kita buat array palsu berisi 6 elemen untuk menampilkan 6 skeleton */}
                     {[1, 2, 3, 4, 5, 6].map((n) => (
                         <div key={n} className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 flex flex-col animate-pulse">
-                            {/* Gambar Skeleton */}
                             <div className="w-full h-48 bg-gray-200"></div>
                             
-                            {/* Konten Skeleton */}
                             <div className="p-5 flex-1 flex flex-col">
-                                {/* Judul Skeleton */}
                                 <div className="h-6 bg-gray-200 rounded-full w-3/4 mb-4"></div>
-                                {/* Deskripsi Skeleton */}
                                 <div className="h-4 bg-gray-200 rounded-full w-full mb-2"></div>
                                 <div className="h-4 bg-gray-200 rounded-full w-5/6 mb-6"></div>
                                 
-                                {/* Info Detail Skeleton */}
                                 <div className="space-y-3 mb-6 mt-auto">
                                     <div className="h-4 bg-gray-200 rounded-full w-1/2"></div>
                                     <div className="h-4 bg-gray-200 rounded-full w-2/3"></div>
                                     <div className="h-4 bg-gray-200 rounded-full w-1/3"></div>
                                 </div>
 
-                                {/* Tombol Skeleton */}
                                 <div className="pt-4 border-t border-gray-100">
                                     <div className="h-12 bg-gray-200 rounded-xl w-full"></div>
                                 </div>
@@ -131,7 +120,6 @@ export default function CariDonasi() {
                 </div>
             ) : donations.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {/* ... (KODE KARTU DONASI ASLI TETAP SAMA SEPERTI SEBELUMNYA) ... */}
                     {donations.map((donasi) => (
                         <div key={donasi.id} className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col group relative">
                             {donasi.photo_url ? (
@@ -187,7 +175,6 @@ export default function CariDonasi() {
                 </div>
             )}
 
-            {/* CUSTOM MODAL KONFIRMASI */}
             {isModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
                     <div 

@@ -3,7 +3,6 @@ export default function OurStory() {
         <section className="py-20 bg-white">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="grid lg:grid-cols-2 gap-16 items-center">
-                    {/* Text */}
                     <div>
                         <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-700 px-4 py-1.5 rounded-full text-sm font-bold mb-6">
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -24,7 +23,7 @@ export default function OurStory() {
                             </p>
                             <p>
                                 Kami menyaksikan langsung bagaimana restoran dan kafe setiap hari harus membuang
-                                puluhan porsi makanan yang masih layak konsumsi — bukan karena tidak ada yang membutuhkan,
+                                puluhan porsi makanan yang masih layak konsumsi bukan karena tidak ada yang membutuhkan,
                                 tetapi karena tidak ada sistem yang menghubungkan keduanya secara efisien.
                             </p>
                             <p>
@@ -42,21 +41,18 @@ export default function OurStory() {
                         <div className="space-y-8 pl-16">
                             {[
                                 {
-                                    year: "2024",
                                     color: "bg-orange-500",
                                     title: "Ide Muncul",
                                     desc: "Melihat realita food waste harian di lingkungan sekitar, kami mulai bermimpi tentang solusinya.",
                                     emoji: "💡",
                                 },
                                 {
-                                    year: "2025",
                                     color: "bg-amber-500",
                                     title: "Rempah Dibangun",
                                     desc: "Platform pertama diluncurkan dengan fitur donasi sederhana, menghubungkan donatur dan relawan pertama kami.",
                                     emoji: "🚀",
                                 },
                                 {
-                                    year: "2026",
                                     color: "bg-green-600",
                                     title: "Dampak Nyata",
                                     desc: "Ratusan porsi makanan berhasil diselamatkan, dan jaringan kebaikan terus berkembang setiap harinya.",
@@ -69,7 +65,6 @@ export default function OurStory() {
                                         {item.emoji}
                                     </div>
                                     <div className="bg-stone-50 rounded-2xl p-6 border border-gray-100 shadow-sm w-full hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
-                                        <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">{item.year}</span>
                                         <h3 className="text-lg font-bold text-gray-900 mt-1 mb-2">{item.title}</h3>
                                         <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
                                     </div>

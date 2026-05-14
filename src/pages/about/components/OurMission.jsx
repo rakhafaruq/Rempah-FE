@@ -1,12 +1,10 @@
 export default function OurMission() {
     return (
         <section className="py-20 bg-gradient-to-br from-green-900 to-green-800 relative overflow-hidden">
-            {/* Decorative blobs */}
             <div className="absolute -top-20 -left-20 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
             <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-green-400/10 rounded-full blur-3xl pointer-events-none"></div>
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
-                {/* Header */}
                 <div className="text-center mb-16">
                     <div className="inline-flex items-center space-x-2 bg-white/10 text-green-200 px-4 py-1.5 rounded-full text-sm font-bold mb-5 border border-white/10">
                         <svg className="w-4 h-4 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -22,7 +20,6 @@ export default function OurMission() {
 
                 {/* Mission & Vision cards */}
                 <div className="grid md:grid-cols-2 gap-8 mb-16">
-                    {/* Mission */}
                     <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-10 border border-white/10 hover:bg-white/15 transition-all duration-300">
                         <div className="w-14 h-14 bg-orange-500/20 rounded-2xl flex items-center justify-center mb-6">
                             <svg className="w-7 h-7 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">

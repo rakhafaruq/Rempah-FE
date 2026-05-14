@@ -1,27 +1,26 @@
 import { useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import toast from "react-hot-toast"; // Import toast
+import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
 
 export default function AdminLayout() {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
 
-    // State untuk Modal Logout
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
 
     const executeLogout = async () => {
         setIsLoggingOut(true);
         toast.promise(
-            logout(), // Panggil fungsi logout dari context
+            logout(),
             {
                 loading: 'Proses keluar...',
                 success: 'Berhasil keluar. Sampai jumpa!',
                 error: 'Terjadi kesalahan saat keluar.',
             }
         ).then(() => {
-            navigate("/"); // Arahkan ke beranda jika berhasil
+            navigate("/");
         }).finally(() => {
             setIsLoggingOut(false);
             setIsLogoutModalOpen(false);
@@ -112,14 +111,14 @@ export default function AdminLayout() {
                             <button 
                                 onClick={() => setIsLogoutModalOpen(false)}
                                 disabled={isLoggingOut}
-                                className="flex-1 py-3 px-4 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-colors disabled:opacity-50"
+                                className="cursor-pointer flex-1 py-3 px-4 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-colors disabled:opacity-50"
                             >
                                 Batal
                             </button>
                             <button 
                                 onClick={executeLogout}
                                 disabled={isLoggingOut}
-                                className="flex-1 py-3 px-4 bg-red-600 text-white font-bold rounded-xl hover:bg-red-700 transition-colors shadow-lg shadow-red-200 flex justify-center items-center gap-2 disabled:opacity-70"
+                                className="cursor-pointer flex-1 py-3 px-4 bg-red-600 text-white font-bold rounded-xl hover:bg-red-700 transition-colors shadow-lg shadow-red-200 flex justify-center items-center gap-2 disabled:opacity-70"
                             >
                                 {isLoggingOut ? (
                                     <><div className="w-5 h-5 border-2 border-white/50 border-t-white rounded-full animate-spin"></div> Memproses...</>

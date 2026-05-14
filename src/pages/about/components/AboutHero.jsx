@@ -1,7 +1,6 @@
 export default function AboutHero() {
     return (
         <section className="relative pt-28 pb-20 overflow-hidden">
-            {/* Background decorations */}
             <div className="absolute inset-0 -z-10 pointer-events-none">
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-orange-50 via-stone-50 to-green-50"></div>
                 <div className="absolute -top-20 -right-20 w-96 h-96 bg-orange-300/20 rounded-full blur-3xl"></div>
@@ -10,7 +9,6 @@ export default function AboutHero() {
             </div>
 
             <div className="max-w-4xl mx-auto px-6 text-center">
-                {/* Badge */}
                 <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm text-green-800 px-5 py-2 rounded-full text-sm font-semibold border border-green-100 shadow-sm mb-6">
                     <span className="relative flex h-2.5 w-2.5">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
