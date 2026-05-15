@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
 
 export default function AdminLayout() {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const executeLogout = async () => {
         setIsLoggingOut(true);
@@ -42,62 +44,127 @@ export default function AdminLayout() {
 
     const menus = isDonatur ? donaturMenus : relawanMenus;
 
-    return (
-        <div className="h-screen flex bg-stone-100 font-sans overflow-hidden relative">
-            {/* Sidebar */}
-            <aside className="w-64 h-screen bg-green-900 flex flex-col shadow-2xl flex-shrink-0 z-10">
-                <div className="p-6 border-b border-green-800">
+    const SidebarContent = () => (
+        <>
+            <div className="p-6 border-b border-green-800 flex items-center justify-between">
+                <div>
                     <Link to="/" className="text-2xl font-extrabold text-white tracking-tight">REMPAH</Link>
                     <p className="text-green-400 text-xs mt-1 font-medium">Rescue Makanan Penuh Berkah</p>
                 </div>
+                {/* Close button - mobile only */}
+                <button
+                    onClick={() => setIsSidebarOpen(false)}
+                    className="md:hidden text-green-300 hover:text-white p-1 rounded-lg transition-colors"
+                    aria-label="Tutup menu"
+                >
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
 
-                {/* User Info */}
-                <div className="p-4 m-4 bg-green-800/50 rounded-2xl border border-green-700/50">
-                    <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center text-white font-bold text-lg mb-2">
-                        {user?.name?.[0]?.toUpperCase() ?? "?"}
-                    </div>
-                    <p className="text-white font-semibold text-sm leading-tight truncate">{user?.name}</p>
-                    <span className={`inline-block mt-1 px-2 py-0.5 rounded-full text-xs font-semibold capitalize ${isDonatur ? "bg-orange-500/20 text-orange-300" : "bg-teal-500/20 text-teal-300"}`}>
-                        {user?.role}
-                    </span>
+            {/* User Info */}
+            <div className="p-4 m-4 bg-green-800/50 rounded-2xl border border-green-700/50">
+                <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center text-white font-bold text-lg mb-2">
+                    {user?.name?.[0]?.toUpperCase() ?? "?"}
                 </div>
+                <p className="text-white font-semibold text-sm leading-tight truncate">{user?.name}</p>
+                <span className={`inline-block mt-1 px-2 py-0.5 rounded-full text-xs font-semibold capitalize ${isDonatur ? "bg-orange-500/20 text-orange-300" : "bg-teal-500/20 text-teal-300"}`}>
+                    {user?.role}
+                </span>
+            </div>
 
-                {/* Menu */}
-                <nav className="flex-1 px-4 py-2 space-y-1">
-                    {menus.map((m) => (
-                        <Link key={m.to} to={m.to}
-                            className="flex items-center gap-3 px-4 py-3 rounded-xl text-green-200 hover:text-white hover:bg-green-800 transition-all duration-200 font-medium text-sm">
+            {/* Menu */}
+            <nav className="flex-1 px-4 py-2 space-y-1">
+                {menus.map((m) => {
+                    const isActive = location.pathname === m.to;
+                    return (
+                        <Link
+                            key={m.to}
+                            to={m.to}
+                            onClick={() => setIsSidebarOpen(false)}
+                            className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 font-medium text-sm ${
+                                isActive
+                                    ? "bg-green-700 text-white shadow-md"
+                                    : "text-green-200 hover:text-white hover:bg-green-800"
+                            }`}
+                        >
                             <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">{m.icon}</svg>
                             {m.label}
                         </Link>
-                    ))}
-                </nav>
+                    );
+                })}
+            </nav>
 
-                {/* Logout Button (Trigger Modal) */}
-                <div className="p-4 border-t border-green-800">
-                    <button onClick={() => setIsLogoutModalOpen(true)}
-                        className="w-full cursor-pointer flex items-center gap-3 px-4 py-3 rounded-xl text-red-300 hover:text-white hover:bg-red-700/50 transition-all duration-200 font-medium text-sm">
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                        </svg>
-                        Keluar
-                    </button>
-                </div>
+            {/* Logout Button */}
+            <div className="p-4 border-t border-green-800">
+                <button onClick={() => { setIsLogoutModalOpen(true); setIsSidebarOpen(false); }}
+                    className="w-full cursor-pointer flex items-center gap-3 px-4 py-3 rounded-xl text-red-300 hover:text-white hover:bg-red-700/50 transition-all duration-200 font-medium text-sm">
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    Keluar
+                </button>
+            </div>
+        </>
+    );
+
+    return (
+        <div className="h-screen flex bg-stone-100 font-sans overflow-hidden relative">
+
+            {/* ===== DESKTOP SIDEBAR ===== */}
+            <aside className="hidden md:flex w-64 h-screen bg-green-900 flex-col shadow-2xl flex-shrink-0 z-10">
+                <SidebarContent />
             </aside>
 
-            {/* Main Content */}
-            <main className="flex-1 overflow-auto">
-                <Outlet />
-            </main>
+            {/* ===== MOBILE SIDEBAR OVERLAY ===== */}
+            {isSidebarOpen && (
+                <div
+                    className="fixed inset-0 z-40 bg-gray-900/50 backdrop-blur-sm md:hidden"
+                    onClick={() => setIsSidebarOpen(false)}
+                />
+            )}
+            <aside
+                className={`fixed top-0 left-0 h-full w-72 bg-green-900 flex flex-col shadow-2xl z-50 transform transition-transform duration-300 ease-in-out md:hidden ${
+                    isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+                }`}
+            >
+                <SidebarContent />
+            </aside>
+
+            {/* ===== MAIN CONTENT ===== */}
+            <div className="flex-1 flex flex-col overflow-hidden">
+                {/* Mobile Top Bar */}
+                <header className="md:hidden bg-green-900 px-4 py-3 flex items-center gap-3 shadow-lg flex-shrink-0">
+                    <button
+                        onClick={() => setIsSidebarOpen(true)}
+                        className="text-white p-2 rounded-xl hover:bg-green-800 transition-colors"
+                        aria-label="Buka menu"
+                    >
+                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                    <span className="text-white font-extrabold text-xl tracking-tight">REMPAH</span>
+                    <div className="ml-auto w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center text-white font-bold text-sm">
+                        {user?.name?.[0]?.toUpperCase() ?? "?"}
+                    </div>
+                </header>
+
+                {/* Page Content */}
+                <main className="flex-1 overflow-auto">
+                    <Outlet />
+                </main>
+            </div>
 
             {/* MODAL KONFIRMASI LOGOUT */}
             {isLogoutModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
-                    <div 
-                        className="absolute inset-0 bg-gray-900/40 backdrop-blur-sm transition-opacity" 
+                    <div
+                        className="absolute inset-0 bg-gray-900/40 backdrop-blur-sm transition-opacity"
                         onClick={!isLoggingOut ? () => setIsLogoutModalOpen(false) : undefined}
                     ></div>
-                    
+
                     <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 max-w-md w-full relative z-10">
                         <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center text-3xl mb-5 mx-auto">
                             🚪
@@ -106,16 +173,16 @@ export default function AdminLayout() {
                         <p className="text-center text-gray-600 mb-6 leading-relaxed">
                             Sesi Anda akan diakhiri dan Anda harus masuk kembali untuk mengelola atau mengklaim donasi makanan.
                         </p>
-                        
+
                         <div className="flex flex-col sm:flex-row gap-3 mt-4">
-                            <button 
+                            <button
                                 onClick={() => setIsLogoutModalOpen(false)}
                                 disabled={isLoggingOut}
                                 className="cursor-pointer flex-1 py-3 px-4 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-colors disabled:opacity-50"
                             >
                                 Batal
                             </button>
-                            <button 
+                            <button
                                 onClick={executeLogout}
                                 disabled={isLoggingOut}
                                 className="cursor-pointer flex-1 py-3 px-4 bg-red-600 text-white font-bold rounded-xl hover:bg-red-700 transition-colors shadow-lg shadow-red-200 flex justify-center items-center gap-2 disabled:opacity-70"
