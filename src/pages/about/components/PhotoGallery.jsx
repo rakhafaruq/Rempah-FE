@@ -1,20 +1,24 @@
+import aksiNyata1 from "../../../assets/aksi_nyata-1.jpeg";
+import aksiNyata2 from "../../../assets/aksi_nyata-2.jpeg";
+import aksiNyata3 from "../../../assets/aksi_nyata-3.jpeg";
+
 export default function PhotoGallery() {
     const photos = [
         {
             id: 1,
-            src: "/src/assets/aksi_nyata-2.jpeg",
+            src: aksiNyata2,
             alt: "Relawan mengambil makanan",
             position: "rotate-6 translate-x-12 -translate-y-12 sm:translate-x-20 sm:-translate-y-20 z-20",
         },
         {
             id: 2,
-            src: "/src/assets/aksi_nyata-1.jpeg",
+            src: aksiNyata1,
             alt: "Komunitas",
             position: "-rotate-6 -translate-x-4 translate-y-8 sm:-translate-x-8 sm:translate-y-12 z-30",
         },
         {
             id: 3,
-            src: "/src/assets/aksi_nyata-3.jpeg",
+            src: aksiNyata3,
             alt: "Aksi nyata",
             position: "rotate-12 translate-x-12 translate-y-12 sm:translate-x-24 sm:translate-y-20 z-40",
         }
